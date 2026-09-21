@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: file:;" />
+<title>PEEKitUP</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header id="bar">
+    <span id="filename">PEEKitUP</span>
+    <span id="dot" title="Unsaved changes">●</span>
+    <span class="spacer"></span>
+    <button id="newBtn" title="New file (Ctrl+N)">New</button>
+    <button id="openBtn" title="Open (Ctrl+O)">Open…</button>
+    <button id="editBtn" class="file-only" title="Edit / Preview (Ctrl+E)">✎ Edit</button>
+    <button id="saveBtn" class="file-only" title="Save (Ctrl+S)">Save</button>
+    <button id="saveAsBtn" class="file-only" title="Save As a new file (Ctrl+Shift+S)">Save As…</button>
+    <button id="helpBtn" title="Markdown guide + shortcuts (Ctrl+/)">?</button>
+    <button id="themeBtn" title="Dark / light">◐</button>
+  </header>
+
+  <!-- FORMAT TOOLBAR (edit mode only) -->
+  <div id="tools">
+    <button data-act="h1" title="Heading 1 (Ctrl+1)">H1</button>
+    <button data-act="h2" title="Heading 2 (Ctrl+2)">H2</button>
+    <button data-act="h3" title="Heading 3 (Ctrl+3)">H3</button>
+    <span class="sep"></span>
+    <button data-act="bold" title="Bold (Ctrl+B)"><b>B</b></button>
+    <button data-act="italic" title="Italic (Ctrl+I)"><i>I</i></button>
+    <button data-act="strike" title="Strikethrough"><s>S</s></button>
+    <button data-act="code" title="Inline code">&lt;/&gt;</button>
+    <button data-act="link" title="Link (Ctrl+K)">🔗</button>
+    <span class="sep"></span>
+    <button data-act="ul" title="Bullet list">• List</button>
+    <button data-act="ol" title="Numbered list">1. List</button>
+    <button data-act="task" title="Checklist">☐ Task</button>
+    <button data-act="quote" title="Quote">❝</button>
+    <span class="sep"></span>
+    <button data-act="codeblock" title="Code block">{ }</button>
+    <button data-act="table" title="Table">▦</button>
+    <button data-act="hr" title="Divider line">―</button>
+  </div>
+
+  <!-- EMPTY SCREEN -->
+  <main id="drop">
+    <div class="hint">
+      <div class="icon">⤓</div>
+      <h2>Drop a Markdown file here</h2>
+      <p>.md &nbsp;·&nbsp; .markdown &nbsp;·&nbsp; or click <b>Open…</b> &nbsp;·&nbsp; or <b>New</b> to write one</p>
+    </div>
+  </main>
+
+  <!-- EDITOR + PREVIEW -->
+  <div id="workspace">
+    <textarea id="editor" spellcheck="false" placeholder="Write Markdown here…"></textarea>
+    <article id="content"><div id="page"></div></article>
+  </div>
+
+  <!-- GUIDE PANEL -->
+  <aside id="help">
+    <div class="help-head"><b>Markdown guide</b><button id="closeHelp">✕</button></div>
+
+    <h4>Type this → get this</h4>
+    <table>
+      <tr><td><code># Title</code></td><td>Heading 1 (biggest)</td></tr>
+      <tr><td><code>## Title</code></td><td>Heading 2</td></tr>
+      <tr><td><code>### Title</code></td><td>Heading 3</td></tr>
+      <tr><td><code>#### Title</code></td><td>Heading 4 … up to <code>######</code></td></tr>
+      <tr><td><code>**bold**</code></td><td><b>bold</b></td></tr>
+      <tr><td><code>*italic*</code></td><td><i>italic</i></td></tr>
+      <tr><td><code>~~strike~~</code></td><td><s>strike</s></td></tr>
+      <tr><td><code>`code`</code></td><td>inline code</td></tr>
+      <tr><td><code>- item</code></td><td>bullet list</td></tr>
+      <tr><td><code>1. item</code></td><td>numbered list</td></tr>
+      <tr><td><code>- [ ] todo</code></td><td>checklist (<code>[x]</code> = done)</td></tr>
+      <tr><td><code>&gt; quote</code></td><td>quote block</td></tr>
+      <tr><td><code>[text](url)</code></td><td>link</td></tr>
+      <tr><td><code>![alt](url)</code></td><td>image</td></tr>
+      <tr><td><code>---</code></td><td>divider line</td></tr>
+      <tr><td><code>```</code> … <code>```</code></td><td>code block (fence lines alone)</td></tr>
+      <tr><td><code>| a | b |</code><br><code>| --- | --- |</code></td><td>table</td></tr>
+    </table>
+
+    <h4>Shortcuts <small>(Cmd on Mac)</small></h4>
+    <table>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>E</kbd></td><td>Edit / preview only</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Save (over same file)</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td><td>Save As (new copy)</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd></td><td>Open</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td>New file</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>B</kbd> / <kbd>I</kbd></td><td>Bold / Italic</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>K</kbd></td><td>Link</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></td><td>Heading 1 / 2 / 3 (again = remove)</td></tr>
+      <tr><td><kbd>Enter</kbd> in a list</td><td>Next bullet / number auto</td></tr>
+      <tr><td><kbd>Enter</kbd> on empty bullet</td><td>End the list</td></tr>
+      <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Indent / outdent</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>/</kbd></td><td>This guide</td></tr>
+    </table>
+  </aside>
+
+  <div id="toast"></div>
+  <div id="overlay">Release to open</div>
+
+<script src="markdown.js"></script>
+<script src="renderer.js"></script>
+</body>
+</html>

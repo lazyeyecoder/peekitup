@@ -1,0 +1,49 @@
+{
+  "name": "peekitup",
+  "version": "1.1.0",
+  "description": "Simple local viewer/editor for files you have no app for. Starts with Markdown.",
+  "main": "main.js",
+  "author": "Aryan Maurya",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --publish never",
+    "dist:win": "electron-builder --win --publish never",
+    "dist:mac": "electron-builder --mac --publish never",
+    "dist:linux": "electron-builder --linux --publish never",
+    "release": "electron-builder --win --publish always"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.you.peekitup",
+    "productName": "PEEKitUP",
+    "files": ["main.js", "preload.js", "src/**/*", "build/icon.png"],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "lazyeyecoder",
+        "repo": "peekitup",
+        "releaseType": "release"
+      }
+    ],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }, { "target": "portable", "arch": ["x64"] }]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": { "target": "dmg", "category": "public.app-category.utilities" },
+    "linux": { "target": ["AppImage"], "category": "Utility" },
+    "fileAssociations": [
+      { "ext": "md", "name": "Markdown", "role": "Editor" },
+      { "ext": "markdown", "name": "Markdown", "role": "Editor" }
+    ]
+  }
+}
